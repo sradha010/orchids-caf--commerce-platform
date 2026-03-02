@@ -1,0 +1,49 @@
+import { Button } from "@/components/ui/button";
+import { SITE_CONFIG } from "@/constants";
+
+export function Hero() {
+  return (
+    <section className="relative flex flex-col items-center justify-center py-28 md:py-40 overflow-hidden bg-[#f5f0e8]">
+      {/* Decorative background texture overlay */}
+      <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/worn-dots.png')]" />
+
+      <div className="relative container px-4 md:px-6 mx-auto text-center">
+        <p className="uppercase tracking-[0.25em] text-[#7a6a52] text-sm font-semibold mb-4">
+          Handcrafted with love
+        </p>
+        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-[#3b2f1e] font-serif leading-tight">
+          AMA<br />
+          <span className="text-[#6b8f5e]">Cafe</span>
+        </h1>
+        <p className="mx-auto mt-6 max-w-[600px] text-[#7a6a52] md:text-xl leading-relaxed">
+          {SITE_CONFIG.description}
+        </p>
+        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#menu">
+            <Button
+              size="lg"
+              className="bg-[#6b8f5e] hover:bg-[#5a7a4e] text-white rounded-full px-8 text-base font-semibold tracking-wide"
+            >
+              See Our Menu
+            </Button>
+          </a>
+          <a href="#contact">
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-[#c4a882] text-[#7a6a52] hover:bg-[#ede5d8] rounded-full px-8 text-base font-semibold tracking-wide"
+            >
+              Find Us
+            </Button>
+          </a>
+        </div>
+
+        {/* Opening hours pill */}
+        <div className="mt-10 inline-flex items-center gap-2 bg-white/70 border border-[#d9ccba] rounded-full px-5 py-2 text-sm text-[#7a6a52]">
+          <span className="w-2 h-2 rounded-full bg-[#6b8f5e] inline-block" />
+          Open today · {SITE_CONFIG.hours.weekdays.split(": ")[1]}
+        </div>
+      </div>
+    </section>
+  );
+}
