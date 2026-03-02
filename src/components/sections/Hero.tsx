@@ -21,7 +21,7 @@ export function Hero() {
           AMA<br />
           <span className="text-[#6b8f5e]">Cafe</span>
         </h1>
-        <p className="mx-auto mt-6 max-w-[600px] text-[#3b2f1e] md:text-xl leading-relaxed">
+        <p className="mx-auto mt-6 max-w-[600px] text-[#31572c] md:text-xl leading-relaxed">
           {SITE_CONFIG.description}
         </p>
         
