@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 
 const MENU_CATEGORIES = [
   {
@@ -163,7 +161,7 @@ export default function MenuPage() {
 
   return (
     <div className="min-h-screen bg-[#f5f0e8]">
-      <Navbar />
+      
 
       {/* Header */}
       <div className="bg-[#3b2f1e] text-[#f5f0e8] py-14 text-center px-4">
@@ -269,7 +267,7 @@ export default function MenuPage() {
         </div>
       </div>
 
-      <Footer />
+      
     </div>
   );
 }
