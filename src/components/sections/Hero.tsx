@@ -40,7 +40,7 @@ export function Hero() {
 
         <div className="mt-10 inline-flex items-center gap-2 bg-white/70 border border-[#d9ccba] rounded-full px-5 py-2 text-sm text-[#7a6a52]">
           <span className="w-2 h-2 rounded-full bg-[#6b8f5e] inline-block" />
-          Open Today· {SITE_CONFIG.hours.weekdays.split(": ")[1]}
+          Open Today {SITE_CONFIG.hours.weekdays.split(": ")[1]}
         </div>
       </div>
     </section>
