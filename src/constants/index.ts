@@ -27,28 +27,28 @@ export const MENU_ITEMS = [
   {
     category: "Coffee",
     items: [
-      { name: "Espresso", description: "Rich & bold single origin shot", price: "$3.50" },
-      { name: "Cappuccino", description: "Velvety steamed milk with espresso", price: "$4.50" },
-      { name: "Cold Brew", description: "Slow-steeped 18 hours, smooth & strong", price: "$5.00" },
-      { name: "Lavender Latte", description: "House-made lavender syrup & oat milk", price: "$5.50" },
+      { name: "Espresso", description: "Rich & bold single origin shot", price: "₹120" },
+      { name: "Cappuccino", description: "Velvety steamed milk with espresso", price: "₹180" },
+      { name: "Cold Brew", description: "Slow-steeped 18 hours, smooth & strong", price: "₹200" },
+      { name: "Mocha", description: "Espresso, chocolate & steamed milk", price: "₹210" },
     ],
   },
   {
-    category: "Pastries",
+    category: "Frappes",
     items: [
-      { name: "Butter Croissant", description: "Flaky layers, baked fresh each morning", price: "$3.75" },
-      { name: "Blueberry Scone", description: "Wild blueberry with lemon glaze", price: "$4.00" },
-      { name: "Cinnamon Roll", description: "Soft & gooey with cream cheese icing", price: "$4.50" },
-      { name: "Banana Bread", description: "Moist loaf with walnuts & honey", price: "$3.50" },
+      { name: "Java Chip Frappe", description: "Blended coffee with chocolate chips & cream", price: "₹280" },
+      { name: "Strawberry Frappe", description: "Fresh strawberry blended frappe", price: "₹270" },
+      { name: "Chocolate Brownie Frappe", description: "Rich chocolate brownie blended frappe", price: "₹290" },
+      { name: "Red Velvet Frappe", description: "Velvety red & creamy blended frappe", price: "₹285" },
     ],
   },
   {
-    category: "Seasonal Specials",
+    category: "Speciality Brews",
     items: [
-      { name: "Maple Cortado", description: "Espresso with warm maple & oat milk", price: "$5.00" },
-      { name: "Rose Hip Tea", description: "Dried rose hip & hibiscus blend", price: "$3.75" },
-      { name: "Honey Chai", description: "Spiced chai with raw wildflower honey", price: "$4.75" },
-      { name: "Matcha Bloom", description: "Ceremonial matcha with steamed oat milk", price: "$5.25" },
+      { name: "French Press", description: "Full-bodied, rich immersion brew", price: "₹220" },
+      { name: "Himalayan Blend", description: "Curated high-altitude beans, brewed fresh", price: "₹260" },
+      { name: "Pour Over", description: "Clean, precise single-cup pour over", price: "₹240" },
+      { name: "Single Origin Coffee", description: "Rotating single-origin, ask your barista today", price: "₹280" },
     ],
   },
 ];
