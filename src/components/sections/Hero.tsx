@@ -14,14 +14,14 @@ export function Hero() {
       <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/worn-dots.png')]" />
 
       <div className="relative container px-4 md:px-6 mx-auto text-center">
-        <p className="uppercase tracking-[0.25em] text-[#283618] text-sm font-semibold mb-4">
+        <p className="uppercase tracking-[0.25em] text-[#fefae0] text-sm font-semibold mb-4">
           Handcrafted with love
         </p>
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-[#3b2f1e] font-serif leading-tight">
           AMA<br />
-          <span className="text-[#6b8f5e]">Cafe</span>
+          <span className="text-[#3a5a40]">Cafe</span>
         </h1>
-        <p className="mx-auto mt-6 max-w-[600px] text-[#31572c] md:text-xl leading-relaxed">
+        <p className="mx-auto mt-6 max-w-[600px] text-[#fefae0] md:text-xl leading-relaxed">
           {SITE_CONFIG.description}
         </p>
         
