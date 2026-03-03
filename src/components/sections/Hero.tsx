@@ -7,7 +7,7 @@ export function Hero() {
       className="relative flex flex-col items-center justify-center py-28 md:py-40 overflow-hidden bg-cover bg-center bg-no-repeat"
       style={{
         // 0.85 (85%) opacity makes the image very subtle. Increase to 0.9 for even less image visibility.
-        backgroundImage: `linear-gradient(rgba(245, 240, 232, 0.3), rgba(245, 240, 232, 0.3)), url('/hero.avif')`
+        backgroundImage: `linear-gradient(rgba(245, 240, 232, 0.3), rgba(0, 0, 0, 0.5)), url('/hero.avif')`
       }}
     >
       {/* Texture overlay for added depth */}
@@ -40,7 +40,7 @@ export function Hero() {
 
         <div className="mt-10 inline-flex items-center gap-2 bg-white/70 border border-[#d9ccba] rounded-full px-5 py-2 text-sm text-[#7a6a52]">
           <span className="w-2 h-2 rounded-full bg-[#6b8f5e] inline-block" />
-          Open today · {SITE_CONFIG.hours.weekdays.split(": ")[1]}
+          Open Today· {SITE_CONFIG.hours.weekdays.split(": ")[1]}
         </div>
       </div>
     </section>
