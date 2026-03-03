@@ -19,7 +19,7 @@ export function Hero() {
         </p>
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-[#6b8f5e] font-serif leading-tight">
           AMA<br />
-          <span className="text-[#4f772d]">Cafe</span>
+          <span className="text-[#dad7cd]">Cafe</span>
         </h1>
         <p className="mx-auto mt-6 max-w-[600px] text-[#fefae0] md:text-xl leading-relaxed">
           {SITE_CONFIG.description}
