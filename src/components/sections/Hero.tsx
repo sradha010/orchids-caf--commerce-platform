@@ -17,9 +17,9 @@ export function Hero() {
         <p className="uppercase tracking-[0.25em] text-[#fefae0] text-sm font-semibold mb-4">
           Handcrafted with love
         </p>
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-[#99582a] font-serif leading-tight">
+        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-[#6b8f5e] font-serif leading-tight">
           AMA<br />
-          <span className="text-[#414833]">Cafe</span>
+          <span className="text-[#4f772d]">Cafe</span>
         </h1>
         <p className="mx-auto mt-6 max-w-[600px] text-[#fefae0] md:text-xl leading-relaxed">
           {SITE_CONFIG.description}
