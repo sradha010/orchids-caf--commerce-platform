@@ -76,32 +76,7 @@ export function Contact() {
             </div>
           </div>
 
-          {/* Right Side: Visual Map Preview - This entire side remains a clickable link */}
-          <a 
-            href={googleMapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative group h-full min-h-[300px] rounded-3xl overflow-hidden border-4 border-[#4d3d28] hover:border-[#6b8f5e] transition-colors"
-          >
-            <img 
-              src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?auto=format&fit=crop&q=80&w=1000" 
-              alt="Map Location" 
-              className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
-            
-            <div className="absolute bottom-4 left-4 right-4 bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl flex justify-between items-center">
-              <div>
-                <p className="text-white font-bold text-sm">Open in Google Maps</p>
-                <p className="text-white/70 text-xs">Majnu-ka-tilla, New Delhi</p>
-              </div>
-              <div className="bg-[#6b8f5e] p-2 rounded-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </div>
-            </div>
-          </a>
+        
 
         </div>
       </div>
