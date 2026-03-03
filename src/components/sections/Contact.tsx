@@ -1,8 +1,8 @@
 import { SITE_CONFIG } from "@/constants";
 
 export function Contact() {
-  // We encode the address to make sure spaces and special characters work in a URL
-  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE_CONFIG.address)}`;
+  // Exact Google Maps Link for AMA Cafe
+  const googleMapsUrl = "https://www.google.com/maps/place/AMA+Cafe/@28.7032731,77.2246731,17z/data=!3m1!4b1!4m6!3m5!1s0x390cfd856ff9fff1:0x95b9a888b9ef0eb3!8m2!3d28.7032731!4d77.227248!16s%2Fg%2F11b8z9f69z?entry=ttu";
 
   return (
     <section id="contact" className="py-24 md:py-32 bg-[#3b2f1e]">
@@ -14,75 +14,91 @@ export function Contact() {
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-[#f5f0e8] font-serif">
             Find Us
           </h2>
-          <p className="mt-4 text-[#c4a882] max-w-lg mx-auto">
-            We'd love to see you. Pull up a chair and stay a while.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          {/* Address - Now Clickable! */}
+        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          {/* Left Side: Contact Details */}
+          <div className="grid grid-cols-1 gap-4">
+            {/* Clickable Location Card */}
+            <a 
+              href={googleMapsUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group bg-[#4d3d28] rounded-2xl p-6 flex items-start gap-4 transition-all hover:bg-[#5a4830] border border-transparent hover:border-[#6b8f5e]/30"
+            >
+              <div className="w-10 h-10 bg-[#6b8f5e] rounded-full flex items-center justify-center shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold text-[#f5f0e8] font-serif text-lg">Location</h3>
+                <p className="text-[#c4a882] text-sm leading-relaxed">House no. 6, 1st Floor, New Aruna Colony, Majnu-ka-tilla, New Delhi, 110054</p>
+                <span className="text-[#6b8f5e] text-xs font-bold uppercase mt-2 inline-block group-hover:translate-x-1 transition-transform">Get Directions →</span>
+              </div>
+            </a>
+
+            {/* Hours Card */}
+            <div className="bg-[#4d3d28] rounded-2xl p-6 flex items-start gap-4 border border-transparent">
+              <div className="w-10 h-10 bg-[#6b8f5e] rounded-full flex items-center justify-center shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold text-[#f5f0e8] font-serif text-lg">Hours</h3>
+                <p className="text-[#c4a882] text-sm">{SITE_CONFIG.hours.weekdays}</p>
+                <p className="text-[#c4a882] text-sm">{SITE_CONFIG.hours.weekends}</p>
+              </div>
+            </div>
+
+            {/* Contact Card */}
+            <div className="bg-[#4d3d28] rounded-2xl p-6 flex items-start gap-4 border border-transparent">
+              <div className="w-10 h-10 bg-[#6b8f5e] rounded-full flex items-center justify-center shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold text-[#f5f0e8] font-serif text-lg">Socials</h3>
+                <div className="flex gap-4 mt-1">
+                   <a href={SITE_CONFIG.links.instagram} className="text-[#c4a882] hover:text-white text-sm transition-colors">Instagram</a>
+                   <a href={SITE_CONFIG.links.facebook} className="text-[#c4a882] hover:text-white text-sm transition-colors">Facebook</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side: Visual Map Preview */}
           <a 
-            href={googleMapsUrl} 
-            target="_blank" 
+            href={googleMapsUrl}
+            target="_blank"
             rel="noopener noreferrer"
-            className="group bg-[#4d3d28] rounded-2xl p-8 text-center space-y-3 transition-all hover:bg-[#5a4830] hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+            className="relative group h-full min-h-[300px] rounded-3xl overflow-hidden border-4 border-[#4d3d28] hover:border-[#6b8f5e] transition-colors"
           >
-            <div className="w-12 h-12 bg-[#6b8f5e] rounded-full flex items-center justify-center mx-auto group-hover:bg-[#7ba36c] transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
+            {/* Placeholder Map Image - replace with a screenshot of your location if you have one */}
+            <img 
+              src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?auto=format&fit=crop&q=80&w=1000" 
+              alt="Map Location" 
+              className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+            
+            {/* Floating Glassmorphism Label */}
+            <div className="absolute bottom-4 left-4 right-4 bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl flex justify-between items-center">
+              <div>
+                <p className="text-white font-bold text-sm">Open in Google Maps</p>
+                <p className="text-white/70 text-xs">New Aruna Colony, Majnu-ka-tilla</p>
+              </div>
+              <div className="bg-[#6b8f5e] p-2 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
             </div>
-            <h3 className="font-semibold text-[#f5f0e8] font-serif text-lg">Location</h3>
-            <p className="text-[#c4a882] text-sm leading-relaxed">{SITE_CONFIG.address}</p>
-            <p className="text-[#6b8f5e] text-xs font-bold uppercase mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
-              Get Directions →
-            </p>
           </a>
 
-          {/* Hours (Remains the same) */}
-          <div className="bg-[#4d3d28] rounded-2xl p-8 text-center space-y-3">
-            <div className="w-12 h-12 bg-[#6b8f5e] rounded-full flex items-center justify-center mx-auto">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h3 className="font-semibold text-[#f5f0e8] font-serif text-lg">Hours</h3>
-            <p className="text-[#c4a882] text-sm">{SITE_CONFIG.hours.weekdays}</p>
-            <p className="text-[#c4a882] text-sm">{SITE_CONFIG.hours.weekends}</p>
-          </div>
-
-          {/* Contact - Clickable Phone & Email */}
-          <div className="bg-[#4d3d28] rounded-2xl p-8 text-center space-y-3">
-            <div className="w-12 h-12 bg-[#6b8f5e] rounded-full flex items-center justify-center mx-auto">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <h3 className="font-semibold text-[#f5f0e8] font-serif text-lg">Get in Touch</h3>
-            <a href={`tel:${SITE_CONFIG.phone}`} className="block text-[#c4a882] text-sm hover:text-white transition-colors">{SITE_CONFIG.phone}</a>
-            <a href={`mailto:${SITE_CONFIG.email}`} className="block text-[#c4a882] text-sm hover:text-white transition-colors">{SITE_CONFIG.email}</a>
-          </div>
-        </div>
-
-        {/* Social links */}
-        <div className="mt-12 flex justify-center gap-6">
-          <a
-            href={SITE_CONFIG.links.instagram}
-            target="_blank"
-            rel="noreferrer"
-            className="text-[#c4a882] hover:text-[#f5f0e8] text-sm font-medium transition-colors"
-          >
-            Instagram
-          </a>
-          <a
-            href={SITE_CONFIG.links.facebook}
-            target="_blank"
-            rel="noreferrer"
-            className="text-[#c4a882] hover:text-[#f5f0e8] text-sm font-medium transition-colors"
-          >
-            Facebook
-          </a>
         </div>
       </div>
     </section>
