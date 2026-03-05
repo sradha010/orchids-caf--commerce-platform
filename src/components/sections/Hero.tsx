@@ -1,19 +1,51 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { SITE_CONFIG } from "@/constants";
 
-export function Hero() {
-  return (
-    <section 
-      className="relative flex flex-col items-center justify-center py-28 md:py-40 overflow-hidden bg-cover bg-center bg-no-repeat"
-      style={{
-        // 0.85 (85%) opacity makes the image very subtle. Increase to 0.9 for even less image visibility.
-        backgroundImage: `linear-gradient(rgba(67, 65, 63, 0.51), rgba(0, 0, 0, 0.5)), url('/hero.avif')`
-      }}
-    >
-      {/* Texture overlay for added depth */}
-      <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/worn-dots.png')]" />
+// Add your image paths here
+const HERO_IMAGES = [
+  "/hero.avif",
+  "/cafe-interior.jpg", // Add your second image path
+  "/coffee-pour.jpg",   // Add your third image path
+];
 
-      <div className="relative container px-4 md:px-6 mx-auto text-center">
+export function Hero() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    // Timer to change image every 3 seconds
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => 
+        prevIndex === HERO_IMAGES.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 3000);
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
+
+  return (
+    <section className="relative flex flex-col items-center justify-center py-28 md:py-40 overflow-hidden bg-[#3b2f1e]">
+      
+      {/* Background Image Slider Container */}
+      <div className="absolute inset-0 z-0">
+        {HERO_IMAGES.map((image, index) => (
+          <div
+            key={image}
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out`}
+            style={{
+              backgroundImage: `linear-gradient(rgba(67, 65, 63, 0.51), rgba(0, 0, 0, 0.5)), url('${image}')`,
+              opacity: currentImageIndex === index ? 1 : 0,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Texture overlay for added depth */}
+      <div className="absolute inset-0 z-10 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/worn-dots.png')]" />
+
+      <div className="relative z-20 container px-4 md:px-6 mx-auto text-center">
         <p className="uppercase tracking-[0.25em] text-[#fefae0] text-sm font-semibold mb-4">
           Handcrafted with love
         </p>
