@@ -7,9 +7,7 @@ const MENU_CATEGORIES = [
   {
     id: "coffee",
     label: "Coffee",
-    // Use the Font Awesome class here
     icon: "fa-solid fa-mug-saucer",
-    isFontAwesome: true, 
     items: [
       { name: "Espresso", description: "Rich, concentrated single shot", price: "₹120" },
       { name: "Americano", description: "Hot or Iced — espresso with hot/cold water", price: "₹150" },
@@ -27,7 +25,7 @@ const MENU_CATEGORIES = [
   {
     id: "cold-coffee",
     label: "Cold Coffee",
-    icon: "fa-solid fa-cubes-stacked",
+    icon: "fa-solid fa-ice-cream",
     items: [
       { name: "Cold Brew", description: "12-hour steeped smooth cold brew", price: "₹200" },
       { name: "Cold Brew with Milk", description: "Cold brew topped with fresh milk", price: "₹220" },
@@ -42,7 +40,7 @@ const MENU_CATEGORIES = [
   {
     id: "specialty-brews",
     label: "Specialty Brews",
-    icon: "fa-brands fa-angellist",
+    icon: "fa-solid fa-leaf",
     items: [
       { name: "French Press", description: "Full-bodied, rich immersion brew", price: "₹220" },
       { name: "Pour Over", description: "Clean, precise single-cup pour over", price: "₹240" },
@@ -53,7 +51,7 @@ const MENU_CATEGORIES = [
   {
     id: "frappes",
     label: "Frappes",
-    icon: "fa-solid fa-jar",
+    icon: "fa-solid fa-blender",
     items: [
       { name: "Java Chip Frappe", description: "Blended coffee with chocolate chips & cream", price: "₹280" },
       { name: "Oreo Frappe", description: "Crushed Oreos blended with coffee & milk", price: "₹280" },
@@ -67,7 +65,7 @@ const MENU_CATEGORIES = [
   {
     id: "bubble-tea",
     label: "Bubble Tea",
-    icon: "fa-solid fa-beer-mug-empty",
+    icon: "fa-solid fa-circle-dot",
     items: [
       { name: "Original Milk Bubble Tea", description: "Classic creamy milk tea with tapioca pearls", price: "₹260" },
       { name: "Mango Bubble Tea", description: "Tropical mango tea with tapioca pearls", price: "₹270" },
@@ -80,7 +78,7 @@ const MENU_CATEGORIES = [
   {
     id: "hot-beverages",
     label: "Hot Beverages",
-    icon: "fa-solid fa-champagne-glasses",
+    icon: "fa-solid fa-fire-burner",
     items: [
       { name: "Classic Hot Chocolate", description: "Smooth creamy hot chocolate", price: "₹180" },
       { name: "Dark Hot Chocolate", description: "Intense dark cocoa, less sweet", price: "₹190" },
@@ -108,7 +106,7 @@ const MENU_CATEGORIES = [
   {
     id: "mocktails",
     label: "Mocktails",
-    icon:"fa-solid fa-martini-glass",
+    icon: "fa-solid fa-glass-martini-alt",
     items: [
       { name: "Mojito", description: "Fresh mint, lime & soda — classic or flavoured", price: "₹200" },
       { name: "Sparkler", description: "Sparkling fruit & herb infused mocktail", price: "₹210" },
@@ -120,7 +118,7 @@ const MENU_CATEGORIES = [
   {
     id: "food",
     label: "Food",
-    icon: "🍽️",
+    icon: "fa-solid fa-utensils",
     subsections: [
       {
         title: "Snacks & Starters",
@@ -169,6 +167,14 @@ export default function MenuPage() {
 
   const active = MENU_CATEGORIES.find((c) => c.id === activeCategory);
 
+  // Helper function to render icon correctly
+  const renderIcon = (iconStr, className = "") => {
+    if (iconStr.startsWith("fa-")) {
+      return <i className={`${iconStr} ${className}`}></i>;
+    }
+    return <span className={className}>{iconStr}</span>;
+  };
+
   return (
     <div className="min-h-screen bg-[#f5f0e8]">
       {/* Header */}
@@ -193,12 +199,7 @@ export default function MenuPage() {
                   : "bg-white text-[#7a6a52] border-[#d9ccba] hover:border-[#3b2f1e] hover:text-[#3b2f1e]"
               }`}
             >
-              {/* Dynamic Icon Rendering */}
-              {cat.isFontAwesome ? (
-                <i className={`${cat.icon} text-sm`}></i>
-              ) : (
-                <span>{cat.icon}</span>
-              )}
+              {renderIcon(cat.icon, "text-sm")}
               <span>{cat.label}</span>
             </button>
           ))}
@@ -208,12 +209,7 @@ export default function MenuPage() {
         {active && (
           <div>
             <div className="flex items-center gap-3 mb-8">
-              {/* Dynamic Icon Rendering for the Header */}
-              {active.isFontAwesome ? (
-                <i className={`${active.icon} text-3xl text-[#3b2f1e]`}></i>
-              ) : (
-                <span className="text-3xl">{active.icon}</span>
-              )}
+              {renderIcon(active.icon, "text-3xl text-[#3b2f1e]")}
               <h2 className="font-serif text-3xl font-bold text-[#3b2f1e]">{active.label}</h2>
             </div>
 
