@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const MENU_CATEGORIES = [
   {
     id: "coffee",
     label: "Coffee",
-    icon: "☕",
+    // Use the Font Awesome class here
+    icon: "fa-solid fa-mug-saucer",
+    isFontAwesome: true, 
     items: [
       { name: "Espresso", description: "Rich, concentrated single shot", price: "₹120" },
       { name: "Americano", description: "Hot or Iced — espresso with hot/cold water", price: "₹150" },
@@ -25,7 +27,7 @@ const MENU_CATEGORIES = [
   {
     id: "cold-coffee",
     label: "Cold Coffee",
-    icon: "🧊",
+    icon: "fa-solid fa-cubes-stacked",
     items: [
       { name: "Cold Brew", description: "12-hour steeped smooth cold brew", price: "₹200" },
       { name: "Cold Brew with Milk", description: "Cold brew topped with fresh milk", price: "₹220" },
@@ -40,7 +42,7 @@ const MENU_CATEGORIES = [
   {
     id: "specialty-brews",
     label: "Specialty Brews",
-    icon: "🫖",
+    icon: "fa-brands fa-angellist",
     items: [
       { name: "French Press", description: "Full-bodied, rich immersion brew", price: "₹220" },
       { name: "Pour Over", description: "Clean, precise single-cup pour over", price: "₹240" },
@@ -51,7 +53,7 @@ const MENU_CATEGORIES = [
   {
     id: "frappes",
     label: "Frappes",
-    icon: "🥤",
+    icon: "fa-solid fa-jar",
     items: [
       { name: "Java Chip Frappe", description: "Blended coffee with chocolate chips & cream", price: "₹280" },
       { name: "Oreo Frappe", description: "Crushed Oreos blended with coffee & milk", price: "₹280" },
@@ -65,7 +67,7 @@ const MENU_CATEGORIES = [
   {
     id: "bubble-tea",
     label: "Bubble Tea",
-    icon: "🧋",
+    icon: "fa-solid fa-beer-mug-empty",
     items: [
       { name: "Original Milk Bubble Tea", description: "Classic creamy milk tea with tapioca pearls", price: "₹260" },
       { name: "Mango Bubble Tea", description: "Tropical mango tea with tapioca pearls", price: "₹270" },
@@ -78,7 +80,7 @@ const MENU_CATEGORIES = [
   {
     id: "hot-beverages",
     label: "Hot Beverages",
-    icon: "🍫",
+    icon: "fa-solid fa-champagne-glasses",
     items: [
       { name: "Classic Hot Chocolate", description: "Smooth creamy hot chocolate", price: "₹180" },
       { name: "Dark Hot Chocolate", description: "Intense dark cocoa, less sweet", price: "₹190" },
@@ -91,7 +93,7 @@ const MENU_CATEGORIES = [
   {
     id: "smoothies",
     label: "Smoothies & Refreshers",
-    icon: "🥭",
+    icon: "fa-solid fa-lemon",
     items: [
       { name: "Banana Smoothie", description: "Thick creamy banana blend", price: "₹220" },
       { name: "Mango Smoothie", description: "Fresh mango blended smooth", price: "₹230" },
@@ -106,7 +108,7 @@ const MENU_CATEGORIES = [
   {
     id: "mocktails",
     label: "Mocktails",
-    icon: "🍹",
+    icon:"fa-solid fa-martini-glass",
     items: [
       { name: "Mojito", description: "Fresh mint, lime & soda — classic or flavoured", price: "₹200" },
       { name: "Sparkler", description: "Sparkling fruit & herb infused mocktail", price: "₹210" },
@@ -157,12 +159,18 @@ const MENU_CATEGORIES = [
 export default function MenuPage() {
   const [activeCategory, setActiveCategory] = useState("coffee");
 
+  // Hook to load Font Awesome via CDN
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css";
+    document.head.appendChild(link);
+  }, []);
+
   const active = MENU_CATEGORIES.find((c) => c.id === activeCategory);
 
   return (
     <div className="min-h-screen bg-[#f5f0e8]">
-      
-
       {/* Header */}
       <div className="bg-[#3b2f1e] text-[#f5f0e8] py-14 text-center px-4">
         <p className="text-[#c9a96e] text-sm font-medium tracking-widest uppercase mb-2">AMA Cafe — New Delhi</p>
@@ -173,7 +181,7 @@ export default function MenuPage() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-10">
-        {/* Category Tabs — horizontal scroll on mobile */}
+        {/* Category Tabs */}
         <div className="flex gap-2 overflow-x-auto pb-3 scrollbar-hide mb-10">
           {MENU_CATEGORIES.map((cat) => (
             <button
@@ -185,7 +193,12 @@ export default function MenuPage() {
                   : "bg-white text-[#7a6a52] border-[#d9ccba] hover:border-[#3b2f1e] hover:text-[#3b2f1e]"
               }`}
             >
-              <span>{cat.icon}</span>
+              {/* Dynamic Icon Rendering */}
+              {cat.isFontAwesome ? (
+                <i className={`${cat.icon} text-sm`}></i>
+              ) : (
+                <span>{cat.icon}</span>
+              )}
               <span>{cat.label}</span>
             </button>
           ))}
@@ -195,7 +208,12 @@ export default function MenuPage() {
         {active && (
           <div>
             <div className="flex items-center gap-3 mb-8">
-              <span className="text-3xl">{active.icon}</span>
+              {/* Dynamic Icon Rendering for the Header */}
+              {active.isFontAwesome ? (
+                <i className={`${active.icon} text-3xl text-[#3b2f1e]`}></i>
+              ) : (
+                <span className="text-3xl">{active.icon}</span>
+              )}
               <h2 className="font-serif text-3xl font-bold text-[#3b2f1e]">{active.label}</h2>
             </div>
 
@@ -266,8 +284,6 @@ export default function MenuPage() {
           </div>
         </div>
       </div>
-
-      
     </div>
   );
 }
