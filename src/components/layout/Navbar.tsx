@@ -11,8 +11,7 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-[#d9ccba] bg-[#f5f0e8]/95 backdrop-blur supports-[backdrop-filter]:bg-[#f5f0e8]/80">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6 mx-auto">
-        
-        {/* Logo Section */}
+        {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <span className="text-xl font-bold text-[#3b2f1e] font-serif tracking-tight">
             AMA
@@ -22,7 +21,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop Nav links (Middle Section) */}
+        {/* Desktop Nav links */}
         <div className="hidden md:flex gap-7">
           {NAV_ITEMS.map((item) => (
             <Link
@@ -35,10 +34,9 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Action Buttons (Right Section) */}
+        {/* Action Buttons */}
         <div className="flex items-center gap-2">
-          
-          {/* 1. Added Staff Login for Desktop (Previously missing) */}
+          {/* STAFF LOGIN - Added for Desktop View */}
           <Link
             href="/admin"
             className="hidden md:inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-[#7a6a52] hover:text-[#3b2f1e] transition-colors"
@@ -46,7 +44,6 @@ export default function Navbar() {
             Staff Login
           </Link>
 
-          {/* 2. Order Now Button (Visible on Desktop/Tablet) */}
           <Link
             href="/customer"
             className="hidden sm:inline-flex items-center justify-center rounded-full border border-[#6b8f5e] px-4 py-2 text-sm font-medium text-[#6b8f5e] hover:bg-[#6b8f5e] hover:text-white transition-colors"
@@ -54,7 +51,7 @@ export default function Navbar() {
             Order Now
           </Link>
           
-          {/* 3. Mobile Menu Toggle Icon */}
+          {/* Mobile Menu Button */}
           <button 
             onClick={() => setIsOpen(!isOpen)}
             className="p-2 md:hidden text-[#3b2f1e] hover:bg-[#ede5d8] rounded-md transition-colors"
@@ -65,7 +62,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay (Revealed when clicking hamburger) */}
+      {/* Mobile Menu Overlay */}
       {isOpen && (
         <div className="md:hidden bg-[#f5f0e8] border-b border-[#d9ccba] animate-in slide-in-from-top duration-200">
           <div className="flex flex-col space-y-4 px-6 py-8">
@@ -79,8 +76,6 @@ export default function Navbar() {
                 {item.label}
               </Link>
             ))}
-            
-            {/* Mobile Action Buttons */}
             <div className="flex flex-col gap-3 pt-4 border-t border-[#d9ccba]">
               <Link
                 href="/customer"
