@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MENU_ITEMS as INITIAL_MENU, SITE_CONFIG } from "@/constants";
 
 type MenuItem = { name: string; description: string; price: string };
@@ -13,30 +13,6 @@ type Order = {
   status: "pending" | "preparing" | "ready" | "done";
   time: string;
 };
-
-const DEMO_ORDERS: Order[] = [
-  {
-    id: "ORD-001",
-    items: [{ name: "Cappuccino", qty: 2, price: "₹180" }, { name: "Butter Croissant", qty: 1, price: "₹120" }],
-    total: "₹480",
-    status: "pending",
-    time: "10:32 AM",
-  },
-  {
-    id: "ORD-002",
-    items: [{ name: "Cold Brew", qty: 1, price: "₹200" }],
-    total: "₹200",
-    status: "preparing",
-    time: "10:45 AM",
-  },
-  {
-    id: "ORD-003",
-    items: [{ name: "Honey Chai", qty: 2, price: "₹160" }, { name: "Cinnamon Roll", qty: 2, price: "₹150" }],
-    total: "₹620",
-    status: "ready",
-    time: "11:02 AM",
-  },
-];
 
 const STATUS_COLORS: Record<Order["status"], string> = {
   pending: "bg-amber-100 text-amber-700",
@@ -59,7 +35,9 @@ export default function AdminPanel() {
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });
   const [loginError, setLoginError] = useState("");
   const [activeTab, setActiveTab] = useState<"orders" | "menu">("orders");
-  const [orders, setOrders] = useState<Order[]>(DEMO_ORDERS);
+  
+  // UPDATED: Initialize with empty array and load from storage
+  const [orders, setOrders] = useState<Order[]>([]);
   const [menu, setMenu] = useState<MenuSection[]>(INITIAL_MENU);
 
   // Menu editing state
@@ -68,13 +46,31 @@ export default function AdminPanel() {
   const [addingTo, setAddingTo] = useState<number | null>(null);
   const [addForm, setAddForm] = useState<MenuItem>({ name: "", description: "", price: "" });
 
+  // --- SYNC ENGINE ADDED HERE ---
+  useEffect(() => {
+    const loadOrders = () => {
+      const saved = localStorage.getItem("ama_orders");
+      if (saved) {
+        setOrders(JSON.parse(saved));
+      }
+    };
+
+    loadOrders(); // Initial load
+
+    // Listen for the "Place Order" event from the customer tab
+    window.addEventListener("storage", loadOrders);
+    return () => window.removeEventListener("storage", loadOrders);
+  }, []);
+
   function advanceOrder(id: string) {
-    setOrders((prev) =>
-      prev.map((o) =>
-        o.id === id && STATUS_NEXT[o.status] ? { ...o, status: STATUS_NEXT[o.status]! } : o
-      )
+    const updatedOrders = orders.map((o) =>
+      o.id === id && STATUS_NEXT[o.status] ? { ...o, status: STATUS_NEXT[o.status]! } : o
     );
+    setOrders(updatedOrders);
+    // Save the status change back to storage
+    localStorage.setItem("ama_orders", JSON.stringify(updatedOrders));
   }
+  // --- END OF SYNC ENGINE ---
 
   function startEdit(sIdx: number, iIdx: number) {
     setEditingItem({ sIdx, iIdx });
@@ -195,7 +191,7 @@ export default function AdminPanel() {
         </div>
       </header>
 
-      {/* Stats bar */}
+      {/* Stats bar - PERSERVED */}
       <div className="bg-[#4d3d28] border-b border-[#5a4a35]">
         <div className="container mx-auto px-4 py-3 flex gap-6 overflow-x-auto">
           {[
@@ -248,8 +244,8 @@ export default function AdminPanel() {
                   </div>
 
                   <div className="space-y-1 mb-4">
-                    {order.items.map((item) => (
-                      <div key={item.name} className="flex justify-between text-sm">
+                    {order.items.map((item, idx) => (
+                      <div key={item.name + idx} className="flex justify-between text-sm">
                         <span className="text-[#7a6a52]">{item.name} × {item.qty}</span>
                         <span className="text-[#3b2f1e] font-medium">{item.price}</span>
                       </div>
@@ -274,7 +270,7 @@ export default function AdminPanel() {
           </div>
         )}
 
-        {/* MENU MANAGEMENT TAB */}
+        {/* MENU MANAGEMENT TAB - PRESERVED */}
         {activeTab === "menu" && (
           <div className="space-y-10">
             {menu.map((section, sIdx) => (
@@ -321,7 +317,6 @@ export default function AdminPanel() {
                   {section.items.map((item, iIdx) => (
                     <div key={item.name + iIdx}>
                       {editingItem?.sIdx === sIdx && editingItem?.iIdx === iIdx ? (
-                        /* Edit form */
                         <div className="bg-[#ede5d8] rounded-2xl p-4 space-y-2">
                           <input
                             className="w-full rounded-lg border border-[#d9ccba] px-3 py-2 text-sm text-[#3b2f1e] bg-white focus:outline-none focus:border-[#6b8f5e]"
