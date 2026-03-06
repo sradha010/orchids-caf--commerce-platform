@@ -48,7 +48,7 @@ export function Navbar() {
 
           <Link
             href="/customer"
-            className="hidden sm:inline-flex items-center justify-center rounded-full border border-[#6b8f5e] px-4 py-2 text-sm font-medium text-[#6b8f5e] hover:bg-[#6b8f5e] hover:text-white transition-colors"
+            className="hidden sm:inline-flex items-center justify-center rounded-full border border-[#6b8f5e] px-4 py-2 text-sm font-medium text-[#6b8f5e] hover:bg-[#d9ccba] hover:text-white transition-colors"
           >
             Order Now
           </Link>
