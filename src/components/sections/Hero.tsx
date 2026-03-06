@@ -8,7 +8,7 @@ import { SITE_CONFIG } from "@/constants";
 const HERO_IMAGES = [
   "/hero.avif",
   "/cof2.jpeg", // Add your second image path
-  "/coffee3.avif",   // Add your third image path
+  "/coffee_interior.webp",   // Add your third image path
 ];
 
 export function Hero() {
