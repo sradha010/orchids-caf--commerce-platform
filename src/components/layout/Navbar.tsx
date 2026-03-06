@@ -5,12 +5,14 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react"; 
 import { NAV_ITEMS } from "@/constants";
 
-export default function Navbar() {
+// Keep as 'export function' to match your layout.tsx import
+export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-[#d9ccba] bg-[#f5f0e8]/95 backdrop-blur supports-[backdrop-filter]:bg-[#f5f0e8]/80">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6 mx-auto">
+        
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <span className="text-xl font-bold text-[#3b2f1e] font-serif tracking-tight">
