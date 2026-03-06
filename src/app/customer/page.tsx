@@ -105,7 +105,6 @@ type CartItem = {
 };
 
 function parsePrice(price: string) {
-  // handles "₹120" or "$3.50"
   return parseFloat(price.replace(/[^0-9.]/g, ""));
 }
 
@@ -138,7 +137,23 @@ export default function CustomerPanel() {
     });
   }
 
+  // UPDATED PLACE ORDER LOGIC
   function placeOrder() {
+    const orderData = {
+      id: `ORD-${Math.floor(1000 + Math.random() * 9000)}`,
+      items: cart.map(item => ({ name: item.name, qty: item.qty, price: item.price })),
+      total: formatPrice(cart.reduce((s, i) => s + parsePrice(i.price) * i.qty, 0)),
+      status: "pending",
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    };
+
+    // Save to localStorage so Admin tab can see it
+    const currentOrders = JSON.parse(localStorage.getItem("ama_orders") || "[]");
+    localStorage.setItem("ama_orders", JSON.stringify([orderData, ...currentOrders]));
+    
+    // Alert other tabs that a new order was saved
+    window.dispatchEvent(new Event("storage"));
+
     setOrderPlaced(true);
     setCart([]);
     setActiveTab("menu");
@@ -149,7 +164,6 @@ export default function CustomerPanel() {
 
   return (
     <div className="min-h-screen bg-[#f5f0e8]">
-      {/* Header */}
       <header className="sticky top-0 z-50 bg-[#f5f0e8]/95 backdrop-blur border-b border-[#d9ccba]">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -176,7 +190,6 @@ export default function CustomerPanel() {
       </header>
 
       <main className="container mx-auto px-4 py-8 max-w-3xl">
-        {/* Order success banner */}
         {orderPlaced && (
           <div className="mb-6 bg-[#6b8f5e] text-white px-6 py-4 rounded-2xl flex items-center gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -190,7 +203,6 @@ export default function CustomerPanel() {
           </div>
         )}
 
-        {/* Tabs */}
         <div className="flex gap-2 mb-8">
           <button
             onClick={() => setActiveTab("menu")}
@@ -206,7 +218,6 @@ export default function CustomerPanel() {
           </button>
         </div>
 
-        {/* MENU TAB */}
         {activeTab === "menu" && (
           <div className="space-y-10">
             {MENU_ITEMS.map((section) => (
@@ -255,7 +266,6 @@ export default function CustomerPanel() {
           </div>
         )}
 
-        {/* CART TAB */}
         {activeTab === "cart" && (
           <div>
             {cart.length === 0 ? (
@@ -264,7 +274,6 @@ export default function CustomerPanel() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
                 <p className="text-lg font-medium">Your cart is empty</p>
-                <p className="text-sm mt-1">Browse the menu and add some items!</p>
                 <button onClick={() => setActiveTab("menu")} className="mt-4 px-5 py-2 bg-[#3b2f1e] text-[#f5f0e8] rounded-full text-sm font-medium hover:bg-[#4d3d28]">
                   View Menu
                 </button>
@@ -279,9 +288,9 @@ export default function CustomerPanel() {
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="flex items-center gap-2">
-                        <button onClick={() => removeFromCart(item.name)} className="w-7 h-7 rounded-full border border-[#c4a882] text-[#7a6a52] hover:bg-[#ede5d8] flex items-center justify-center font-bold">−</button>
+                        <button onClick={() => removeFromCart(item.name)} className="w-7 h-7 rounded-full border border-[#c4a882] text-[#7a6a52] flex items-center justify-center font-bold">−</button>
                         <span className="text-sm font-bold text-[#3b2f1e] w-4 text-center">{item.qty}</span>
-                        <button onClick={() => addToCart(item.name, item.price, item.category)} className="w-7 h-7 rounded-full bg-[#3b2f1e] text-white hover:bg-[#4d3d28] flex items-center justify-center font-bold">+</button>
+                        <button onClick={() => addToCart(item.name, item.price, item.category)} className="w-7 h-7 rounded-full bg-[#3b2f1e] text-white flex items-center justify-center font-bold">+</button>
                       </div>
                       <span className="text-[#6b8f5e] font-bold text-sm w-14 text-right">
                         {formatPrice(parsePrice(item.price) * item.qty)}
@@ -289,8 +298,6 @@ export default function CustomerPanel() {
                     </div>
                   </div>
                 ))}
-
-                {/* Order summary */}
                 <div className="mt-6 bg-[#3b2f1e] rounded-2xl p-6 text-[#f5f0e8]">
                   <div className="flex justify-between text-sm mb-2">
                     <span className="text-[#c4a882]">Items</span>
@@ -306,7 +313,6 @@ export default function CustomerPanel() {
                   >
                     Place Order
                   </button>
-                  <p className="text-center text-xs text-[#9a8a72] mt-3">Pay at the counter after your order</p>
                 </div>
               </div>
             )}
