@@ -41,7 +41,7 @@ export function Navbar() {
           {/* STAFF LOGIN - Added for Desktop View */}
           <Link
             href="/admin"
-            className="flex items-center justify-center gap-2 rounded-full border border-[#d9ccba] py-3 text-sm font-medium text-[#7a6a52] bg-white/50"
+            className="hidden sm:inline-flex items-center justify-center rounded-full border border-[#d9ccba] px-4 py-2 text-sm font-medium text-[#7a6a52] hover:bg-[#6b8f5e] hover:text-white transition-colors"
           >
             Staff Login
           </Link>
